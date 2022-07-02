@@ -1,17 +1,10 @@
+from secrets import token_bytes
 from base64 import b32encode
-import pyperclip
-import random
+from pyperclip import copy
 
-# max key length 
-MAX_LENGTH = 10
-# max key limit
-MAX_LIMIT = 255
-##############
-key = ''
-for _ in range(MAX_LENGTH):
-    integer = random.randint(0, MAX_LIMIT)
-    key += (chr(integer))
+KEY_LENGTH = 10
 
-keyEncoded = b32encode(bytes(key, "utf-8")).decode()
-print(f'\nYour key is: {keyEncoded}\nCopied key to clipboard!\n')
-pyperclip.copy(keyEncoded)
+key = b32encode(token_bytes(KEY_LENGTH)).decode()
+
+print(f'\nYour key is: {key}\nCopied key to clipboard!\n')
+copy(key)
